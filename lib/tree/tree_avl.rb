@@ -92,7 +92,7 @@ class AVLTree
 
   def pre_order(node)
     unless node.nil?
-      puts "#{node.key} #{node.quantity} "
+      puts "Email: #{node.key} number of commits #{node.quantity} "
       pre_order(node.left)
       pre_order(node.right)
     end
