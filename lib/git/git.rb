@@ -23,7 +23,10 @@ class Git
     response.each_line do |line|
       next unless line.include? 'Author:'
 
-      index = line.index('<') + 1
+      index = line.index('<')
+      next if index.nil?
+
+      index += 1
       tree.root = tree.insert(tree.root, line[index..line.length - 3])
     end
   end
