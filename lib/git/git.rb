@@ -3,7 +3,7 @@ class Git
 
   def initialize(full_path, tree)
     @full_path = full_path
-    @commnad = 'git rev-list --all --remotes --pretty'
+    @commnad = 'git rev-list --all --remotes --pretty --no-merges'
     @tree = tree
   end
 
@@ -21,10 +21,10 @@ class Git
   def search_all_contribuitores
     response = git_log
     response.each_line do |line|
-      if line.include? 'Author:'
-        index = line.index('<') + 1
-        tree.root = tree.insert(tree.root, line[index..line.length - 3])
-      end
+      next unless line.include? 'Author:'
+
+      index = line.index('<') + 1
+      tree.root = tree.insert(tree.root, line[index..line.length - 3])
     end
   end
 end
